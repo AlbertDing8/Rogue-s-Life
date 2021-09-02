@@ -596,11 +596,11 @@ def in_range(a, b, dist):
 
 # move mob
 def move_mob(char, mob):
-    variation = 16
 
     if in_range(char.rectangle, mob.rectangle, 1):  # attack user if nearby
         if mob.atk_break == -1:
-            if mob.rectangle.x - variation <= char.rectangle.x <= mob.rectangle.x + variation:
+            if (mob.rectangle.x <= char.rectangle.x <= mob.rectangle.x + CHAR_SIZE) or\
+                    (mob.rectangle.x <= char.rectangle.x + CHAR_SIZE <= mob.rectangle.x + CHAR_SIZE):
                 if mob.rectangle.y < char.rectangle.y:
                     mob.direction = "down"
                     mob.attacking = True
@@ -611,7 +611,8 @@ def move_mob(char, mob):
                     mob.attacking = True
                     mob.atk_anim += 1
                     mob.atk_break += 1
-            elif mob.rectangle.y - variation <= char.rectangle.y <= mob.rectangle.y + variation:
+            elif (mob.rectangle.y <= char.rectangle.y <= mob.rectangle.y + CHAR_SIZE) or\
+                    (mob.rectangle.y <= char.rectangle.y + CHAR_SIZE <= mob.rectangle.y + CHAR_SIZE):
                 if mob.rectangle.x < char.rectangle.x:
                     mob.direction = "right"
                     mob.attacking = True
@@ -623,7 +624,8 @@ def move_mob(char, mob):
                     mob.atk_anim += 1
                     mob.atk_break += 1
     elif in_range(char.rectangle, mob.rectangle, 5):  # walk into attack range
-        if mob.rectangle.x - variation <= char.rectangle.x <= mob.rectangle.x + variation:
+        if (mob.rectangle.x <= char.rectangle.x <= mob.rectangle.x + CHAR_SIZE) or\
+                (mob.rectangle.x <= char.rectangle.x + CHAR_SIZE <= mob.rectangle.x + CHAR_SIZE):
             if mob.rectangle.y < char.rectangle.y:
                 mob.direction = "down"
                 mob.walking = True
@@ -632,7 +634,8 @@ def move_mob(char, mob):
                 mob.direction = "up"
                 mob.walking = True
                 mob.walk_anim += 1
-        elif mob.rectangle.y - variation <= char.rectangle.y <= mob.rectangle.y + variation:
+        elif (mob.rectangle.y <= char.rectangle.y <= mob.rectangle.y + CHAR_SIZE) or\
+                (mob.rectangle.y <= char.rectangle.y + CHAR_SIZE <= mob.rectangle.y + CHAR_SIZE):
             if mob.rectangle.x < char.rectangle.x:
                 mob.direction = "right"
                 mob.walking = True
